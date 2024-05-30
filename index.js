@@ -1,6 +1,6 @@
 module.exports = AABB
 
-var vec3 = require('gl-vec3')
+var vec3 = require('gl-matrix').vec3
 
 function AABB(pos, vec) {
 
