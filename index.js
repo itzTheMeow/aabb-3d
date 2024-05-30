@@ -1,8 +1,7 @@
-module.exports = AABB
-
 var vec3 = require('gl-matrix').vec3
 
-function AABB(pos, vec) {
+class AABB {
+constructor(pos, vec) {
 
   if(!(this instanceof AABB)) {
     return new AABB(pos, vec)
@@ -19,55 +18,55 @@ function AABB(pos, vec) {
 
 }
 
-AABB.prototype.width = function() {
+width() {
   return this.vec[0]
 }
 
-AABB.prototype.height = function() {
+height() {
   return this.vec[1]
 }
 
-AABB.prototype.depth = function() {
+depth() {
   return this.vec[2]
 }
 
-AABB.prototype.x0 = function() {
+x0() {
   return this.base[0]
 }
 
-AABB.prototype.y0 = function() {
+y0() {
   return this.base[1]
 }
 
-AABB.prototype.z0 = function() {
+z0() {
   return this.base[2]
 }
 
-AABB.prototype.x1 = function() {
+x1() {
   return this.max[0]
 }
 
-AABB.prototype.y1 = function() {
+y1() {
   return this.max[1]
 }
 
-AABB.prototype.z1 = function() {
+z1() {
   return this.max[2]
 }
 
-AABB.prototype.translate = function(by) {
+translate(by) {
   vec3.add(this.max, this.max, by)
   vec3.add(this.base, this.base, by)
   return this
 }
 
-AABB.prototype.setPosition = function(pos) {
+setPosition(pos) {
   vec3.add(this.max, pos, this.vec)
   vec3.copy(this.base, pos)
   return this
 }
 
-AABB.prototype.expand = function(aabb) {
+expand(aabb) {
   var max = vec3.create()
     , min = vec3.create()
 
@@ -78,7 +77,7 @@ AABB.prototype.expand = function(aabb) {
   return new AABB(min, max)
 }
 
-AABB.prototype.intersects = function(aabb) {
+intersects(aabb) {
   if(aabb.base[0] > this.max[0]) return false
   if(aabb.base[1] > this.max[1]) return false
   if(aabb.base[2] > this.max[2]) return false
@@ -89,7 +88,7 @@ AABB.prototype.intersects = function(aabb) {
   return true
 }
 
-AABB.prototype.touches = function(aabb) {
+touches(aabb) {
 
   var intersection = this.union(aabb);
 
@@ -100,7 +99,7 @@ AABB.prototype.touches = function(aabb) {
 
 }
 
-AABB.prototype.union = function(aabb) {
+union(aabb) {
   if(!this.intersects(aabb)) return null
 
   var base_x = Math.max(aabb.base[0], this.base[0])
@@ -112,7 +111,9 @@ AABB.prototype.union = function(aabb) {
 
   return new AABB([base_x, base_y, base_z], [max_x - base_x, max_y - base_y, max_z - base_z])
 }
+}
 
+module.exports = AABB
 
 
 
