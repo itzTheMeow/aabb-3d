@@ -3,8 +3,11 @@
   "version": "0.2.1",
   "description": "3d axis aligned bounding boxes",
   "type": "module",
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
+    "build": "tsc --project ./tsconfig.build.json",
+    "dev": "tsc --watch",
     "test": "node --test ./test/index.test.js"
   },
   "repository": {
@@ -25,7 +28,8 @@
     "gl-matrix": "^3.4.3"
   },
   "devDependencies": {
-    "@types/node": "^20.12.13"
+    "@types/node": "^20.12.13",
+    "typescript": "^5.4.5"
   },
   "testling": {
     "files": "test.js",
