@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import { ok, strictEqual } from 'node:assert'
-import aabb from './index.js'
+import aabb from '../src/index.js'
 
 
 if(typeof Float32Array === 'undefined') {
