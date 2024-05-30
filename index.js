@@ -19,58 +19,55 @@ function AABB(pos, vec) {
 
 }
 
-var cons = AABB
-  , proto = cons.prototype
-
-proto.width = function() {
+AABB.prototype.width = function() {
   return this.vec[0]
 }
 
-proto.height = function() {
+AABB.prototype.height = function() {
   return this.vec[1]
 }
 
-proto.depth = function() {
+AABB.prototype.depth = function() {
   return this.vec[2]
 }
 
-proto.x0 = function() {
+AABB.prototype.x0 = function() {
   return this.base[0]
 }
 
-proto.y0 = function() {
+AABB.prototype.y0 = function() {
   return this.base[1]
 }
 
-proto.z0 = function() {
+AABB.prototype.z0 = function() {
   return this.base[2]
 }
 
-proto.x1 = function() {
+AABB.prototype.x1 = function() {
   return this.max[0]
 }
 
-proto.y1 = function() {
+AABB.prototype.y1 = function() {
   return this.max[1]
 }
 
-proto.z1 = function() {
+AABB.prototype.z1 = function() {
   return this.max[2]
 }
 
-proto.translate = function(by) {
+AABB.prototype.translate = function(by) {
   vec3.add(this.max, this.max, by)
   vec3.add(this.base, this.base, by)
   return this
 }
 
-proto.setPosition = function(pos) {
+AABB.prototype.setPosition = function(pos) {
   vec3.add(this.max, pos, this.vec)
   vec3.copy(this.base, pos)
   return this
 }
 
-proto.expand = function(aabb) {
+AABB.prototype.expand = function(aabb) {
   var max = vec3.create()
     , min = vec3.create()
 
@@ -81,7 +78,7 @@ proto.expand = function(aabb) {
   return new AABB(min, max)
 }
 
-proto.intersects = function(aabb) {
+AABB.prototype.intersects = function(aabb) {
   if(aabb.base[0] > this.max[0]) return false
   if(aabb.base[1] > this.max[1]) return false
   if(aabb.base[2] > this.max[2]) return false
@@ -92,7 +89,7 @@ proto.intersects = function(aabb) {
   return true
 }
 
-proto.touches = function(aabb) {
+AABB.prototype.touches = function(aabb) {
 
   var intersection = this.union(aabb);
 
@@ -103,7 +100,7 @@ proto.touches = function(aabb) {
 
 }
 
-proto.union = function(aabb) {
+AABB.prototype.union = function(aabb) {
   if(!this.intersects(aabb)) return null
 
   var base_x = Math.max(aabb.base[0], this.base[0])
