@@ -3,10 +3,6 @@ var vec3 = require('gl-matrix').vec3
 class AABB {
 constructor(pos, vec) {
 
-  if(!(this instanceof AABB)) {
-    return new AABB(pos, vec)
-  }
-
   var pos2 = vec3.create()
   vec3.add(pos2, pos, vec)
  

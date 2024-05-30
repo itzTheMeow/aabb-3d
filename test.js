@@ -22,7 +22,7 @@ test('translate works', function(t) {
   var w = random()
     , h = random()
     , d = random()
-    , b = aabb([0, 0, 0], [w, h, d])
+    , b = new aabb([0, 0, 0], [w, h, d])
     , tx = random()
     , ty = random()
     , tz = random()
@@ -52,7 +52,7 @@ test('setPosition works', function(t) {
     , w = random()
     , h = random()
     , d = random()
-    , b = aabb([fromx, fromy, fromz], [w, h, d])
+    , b = new aabb([fromx, fromy, fromz], [w, h, d])
     , tox = random()
     , toy = random()
     , toz = random()
@@ -76,8 +76,8 @@ test('setPosition works', function(t) {
 })
 
 test('expand works', function(t) {
-  var b0 = aabb([0, 0, 0], [10, 10, 10])
-    , b1 = aabb([-5, -5, -5], [2, 2, 2])
+  var b0 = new aabb([0, 0, 0], [10, 10, 10])
+    , b1 = new aabb([-5, -5, -5], [2, 2, 2])
     , b2 
 
   b2 = b0.expand(b1)
@@ -91,60 +91,60 @@ test('expand works', function(t) {
 })
 
 test('intersects works', function(t) {
-  var b0 = aabb([10, 10, 10], [10, 10, 10])
-    , b1 = aabb([0, 0, 0], [2, 2, 2])
+  var b0 = new aabb([10, 10, 10], [10, 10, 10])
+    , b1 = new aabb([0, 0, 0], [2, 2, 2])
 
   t.equals(b0.intersects(b1), false, 'should not intersect (either axis)')
 
-  b1 = aabb([0, 0, 0], [20, 2, 2])
+  b1 = new aabb([0, 0, 0], [20, 2, 2])
   t.equals(b0.intersects(b1), false, 'should not intersect (x intersects)')
 
-  b1 = aabb([0, 0, 0], [2, 20, 2])
+  b1 = new aabb([0, 0, 0], [2, 20, 2])
   t.equals(b0.intersects(b1), false, 'should not intersect (y intersects)')
   
-  b1 = aabb([0, 0, 0], [2, 2, 20])
+  b1 = new aabb([0, 0, 0], [2, 2, 20])
   t.equals(b0.intersects(b1), false, 'should not intersect (z intersects)')
   
-  b1 = aabb([21, 20, 20], [20, 20, 20])
+  b1 = new aabb([21, 20, 20], [20, 20, 20])
   t.equals(b0.intersects(b1), false, 'should not intersect (y intersects base)')
   
-  b1 = aabb([20, 21, 20], [20, 20, 20])
+  b1 = new aabb([20, 21, 20], [20, 20, 20])
   t.equals(b0.intersects(b1), false, 'should not intersect (x intersects base)')
   
-  b1 = aabb([20, 20, 21], [20, 20, 20])
+  b1 = new aabb([20, 20, 21], [20, 20, 20])
   t.equals(b0.intersects(b1), false, 'should not intersect (z intersects base)')
 
-  b1 = aabb([20, 20, 20], [20, 20, 20])
+  b1 = new aabb([20, 20, 20], [20, 20, 20])
   t.equals(b0.intersects(b1), true, 'should intersect (b0 touches b1)')
 
-  b1 = aabb([12, 12, 12], [4, 4, 4])
+  b1 = new aabb([12, 12, 12], [4, 4, 4])
   t.equals(b0.intersects(b1), true, 'should intersect (b0 contains b1)')
 
-  b1 = aabb([-5, -5, -5], [20, 20, 20])
+  b1 = new aabb([-5, -5, -5], [20, 20, 20])
   t.equals(b0.intersects(b1), true, 'should intersects (b0 contains b1)')
 
-  b1 = aabb([-5, -5, -5], [10, 10, 10])
+  b1 = new aabb([-5, -5, -5], [10, 10, 10])
   t.equals(b0.intersects(b1), false, 'should not intersect (b0 does not contain b1)')
 
   t.end()
 })
 
 test('touches works', function(t) { 
-  var b0 = aabb([10,10,10], [10, 10, 10])
-    , b1 = aabb([0, 0, 0], [10, 10, 10])
+  var b0 = new aabb([10,10,10], [10, 10, 10])
+    , b1 = new aabb([0, 0, 0], [10, 10, 10])
 
   t.equals(b0.touches(b1), true, 'should touch')
 
-  b1 = aabb([10, 0, 0], [10, 10, 10])
+  b1 = new aabb([10, 0, 0], [10, 10, 10])
   t.equals(b0.touches(b1), true, 'should touch')
 
-  b1 = aabb([0, 10, 0], [10, 10, 10])
+  b1 = new aabb([0, 10, 0], [10, 10, 10])
   t.equals(b0.touches(b1), true, 'should touch')
 
-  b1 = aabb([0, 0, 10], [10, 10, 10])
+  b1 = new aabb([0, 0, 10], [10, 10, 10])
   t.equals(b0.touches(b1), true, 'should touch')
 
-  b1 = aabb([-10, -10, -10], [10, 10, 10])
+  b1 = new aabb([-10, -10, -10], [10, 10, 10])
   t.equals(b0.touches(b1), false, 'should not touch')
   t.end()
 })
