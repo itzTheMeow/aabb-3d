@@ -1,6 +1,10 @@
 var vec3 = require('gl-matrix').vec3
 
 class AABB {
+/**
+ * @param {import('gl-matrix').ReadonlyVec3} pos
+ * @param {import('gl-matrix').ReadonlyVec3} vec
+ */
 constructor(pos, vec) {
 
   var pos2 = vec3.create()
@@ -14,54 +18,93 @@ constructor(pos, vec) {
 
 }
 
+/**
+ * @returns {number}
+ */
 width() {
   return this.vec[0]
 }
 
+/**
+ * @returns {number}
+ */
 height() {
   return this.vec[1]
 }
 
+/**
+ * @returns {number}
+ */
 depth() {
   return this.vec[2]
 }
 
+/**
+ * @returns {number}
+ */
 x0() {
   return this.base[0]
 }
 
+/**
+ * @returns {number}
+ */
 y0() {
   return this.base[1]
 }
 
+/**
+ * @returns {number}
+ */
 z0() {
   return this.base[2]
 }
 
+/**
+ * @returns {number}
+ */
 x1() {
   return this.max[0]
 }
 
+/**
+ * @returns {number}
+ */
 y1() {
   return this.max[1]
 }
 
+/**
+ * @returns {number}
+ */
 z1() {
   return this.max[2]
 }
 
+/**
+ * @param {import('gl-matrix').ReadonlyVec3} by
+ * @returns {this}
+ */
 translate(by) {
   vec3.add(this.max, this.max, by)
   vec3.add(this.base, this.base, by)
   return this
 }
 
+/**
+ * @param {import('gl-matrix').ReadonlyVec3} pos
+ * @returns {this}
+ */
 setPosition(pos) {
   vec3.add(this.max, pos, this.vec)
   vec3.copy(this.base, pos)
   return this
 }
 
+/**
+ * @param {AABB} aabb
+ * @returns {AABB}
+ */
 expand(aabb) {
   var max = vec3.create()
     , min = vec3.create()
@@ -73,6 +116,10 @@ expand(aabb) {
   return new AABB(min, max)
 }
 
+/**
+ * @param {AABB} aabb
+ * @returns {boolean}
+ */
 intersects(aabb) {
   if(aabb.base[0] > this.max[0]) return false
   if(aabb.base[1] > this.max[1]) return false
@@ -84,6 +131,10 @@ intersects(aabb) {
   return true
 }
 
+/**
+ * @param {AABB} aabb
+ * @returns {boolean}
+ */
 touches(aabb) {
 
   var intersection = this.union(aabb);
@@ -95,6 +146,10 @@ touches(aabb) {
 
 }
 
+/**
+ * @param {AABB} aabb
+ * @returns {AABB | null}
+ */
 union(aabb) {
   if(!this.intersects(aabb)) return null
 

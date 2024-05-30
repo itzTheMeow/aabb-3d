@@ -6,14 +6,27 @@ if(typeof Float32Array === 'undefined') {
 
 }
 
+/**
+ * @param {number} [n]
+ * @returns {number}
+ */
 function random(n) {
   return Math.random() * (n || 10) + 1
 }
 
+/**
+ * @param {number} [n]
+ * @returns {number}
+ */
 function randint(n) {
   return ~~random(n)
 }
 
+/**
+ * @param {number} x
+ * @param {number} y
+ * @returns {boolean}
+ */
 function eps(x, y) {
   return Math.abs(x - y) < 10e-5
 }
