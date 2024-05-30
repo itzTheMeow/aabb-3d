@@ -31,33 +31,5 @@
     "@types/node": "^20.12.13",
     "tsx": "^4.11.0",
     "typescript": "^5.4.5"
-  },
-  "testling": {
-    "files": "test.js",
-    "browsers": {
-      "ie": [
-        10
-      ],
-      "firefox": [
-        13,
-        14,
-        15,
-        16,
-        17,
-        "nightly"
-      ],
-      "chrome": [
-        20,
-        23,
-        "canary"
-      ],
-      "safari": [
-        6
-      ],
-      "opera": [
-        12,
-        "next"
-      ]
-    }
   }
 }

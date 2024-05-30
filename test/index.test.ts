@@ -2,16 +2,8 @@ import { test } from 'node:test'
 import { ok, strictEqual } from 'node:assert'
 import aabb from '../src/index.js'
 
-if (typeof Float32Array === 'undefined') {
-
-}
-
 function random(n?: number): number {
   return Math.random() * (n || 10) + 1
-}
-
-function randint(n?: number): number {
-  return ~~random(n)
 }
 
 function eps(x: number, y: number): boolean {
