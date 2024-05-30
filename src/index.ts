@@ -3,13 +3,13 @@ import { vec3 } from 'gl-matrix'
 import type { ReadonlyVec3 } from 'gl-matrix'
 
 export default class AABB {
-  base: vec3
-  vec: vec3
-  max: vec3
-  mag: number
+  readonly base: vec3
+  readonly vec: vec3
+  readonly max: vec3
+  readonly mag: number
 
   constructor(pos: ReadonlyVec3, vec: ReadonlyVec3) {
-    var pos2 = vec3.create()
+    const pos2 = vec3.create()
     vec3.add(pos2, pos, vec)
 
     this.base = vec3.min(vec3.create(), pos, pos2)
@@ -68,8 +68,8 @@ export default class AABB {
   }
 
   expand(aabb: AABB): AABB {
-    var max = vec3.create()
-      , min = vec3.create()
+    const max = vec3.create()
+    const min = vec3.create()
 
     vec3.max(max, aabb.max, this.max)
     vec3.min(min, aabb.base, this.base)
@@ -90,7 +90,7 @@ export default class AABB {
   }
 
   touches(aabb: AABB): boolean {
-    var intersection = this.union(aabb);
+    const intersection = this.union(aabb);
 
     return (intersection !== null) &&
            ((intersection.width() == 0) ||
@@ -101,12 +101,12 @@ export default class AABB {
   union(aabb: AABB): AABB | null {
     if (!this.intersects(aabb)) return null
 
-    var base_x = Math.max(aabb.base[0], this.base[0])
-      , base_y = Math.max(aabb.base[1], this.base[1])
-      , base_z = Math.max(aabb.base[2], this.base[2])
-      , max_x = Math.min(aabb.max[0], this.max[0])
-      , max_y = Math.min(aabb.max[1], this.max[1])
-      , max_z = Math.min(aabb.max[2], this.max[2])
+    const base_x = Math.max(aabb.base[0], this.base[0])
+    const base_y = Math.max(aabb.base[1], this.base[1])
+    const base_z = Math.max(aabb.base[2], this.base[2])
+    const max_x = Math.min(aabb.max[0], this.max[0])
+    const max_y = Math.min(aabb.max[1], this.max[1])
+    const max_z = Math.min(aabb.max[2], this.max[2])
 
     return new AABB([base_x, base_y, base_z], [max_x - base_x, max_y - base_y, max_z - base_z])
   }

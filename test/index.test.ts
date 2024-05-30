@@ -19,13 +19,13 @@ function eps(x: number, y: number): boolean {
 }
 
 test('translate works', function() {
-  var w = random()
-    , h = random()
-    , d = random()
-    , b = new aabb([0, 0, 0], [w, h, d])
-    , tx = random()
-    , ty = random()
-    , tz = random()
+  const w = random()
+  const h = random()
+  const d = random()
+  const b = new aabb([0, 0, 0], [w, h, d])
+  const tx = random()
+  const ty = random()
+  const tz = random()
 
   strictEqual(b.x0(), 0, 'x0 == 0')
   strictEqual(b.y0(), 0, 'y0 == 0')
@@ -45,16 +45,16 @@ test('translate works', function() {
 })
 
 test('setPosition works', function() {
-  var fromx = random()
-    , fromy = random()
-    , fromz = random()
-    , w = random()
-    , h = random()
-    , d = random()
-    , b = new aabb([fromx, fromy, fromz], [w, h, d])
-    , tox = random()
-    , toy = random()
-    , toz = random()
+  const fromx = random()
+  const fromy = random()
+  const fromz = random()
+  const w = random()
+  const h = random()
+  const d = random()
+  const b = new aabb([fromx, fromy, fromz], [w, h, d])
+  const tox = random()
+  const toy = random()
+  const toz = random()
 
   ok(eps(b.x0(), fromx), 'x0 == fromx')
   ok(eps(b.y0(), fromy), 'y0 == fromy')
@@ -74,9 +74,9 @@ test('setPosition works', function() {
 })
 
 test('expand works', function() {
-  var b0 = new aabb([0, 0, 0], [10, 10, 10])
-    , b1 = new aabb([-5, -5, -5], [2, 2, 2])
-    , b2
+  const b0 = new aabb([0, 0, 0], [10, 10, 10])
+  const b1 = new aabb([-5, -5, -5], [2, 2, 2])
+  let b2: aabb;
 
   b2 = b0.expand(b1)
 
@@ -87,8 +87,8 @@ test('expand works', function() {
 })
 
 test('intersects works', function() {
-  var b0 = new aabb([10, 10, 10], [10, 10, 10])
-    , b1 = new aabb([0, 0, 0], [2, 2, 2])
+  const b0 = new aabb([10, 10, 10], [10, 10, 10])
+  let b1 = new aabb([0, 0, 0], [2, 2, 2])
 
   strictEqual(b0.intersects(b1), false, 'should not intersect (either axis)')
 
@@ -124,8 +124,8 @@ test('intersects works', function() {
 })
 
 test('touches works', function() {
-  var b0 = new aabb([10, 10, 10], [10, 10, 10])
-    , b1 = new aabb([0, 0, 0], [10, 10, 10])
+  const b0 = new aabb([10, 10, 10], [10, 10, 10])
+  let b1 = new aabb([0, 0, 0], [10, 10, 10])
 
   strictEqual(b0.touches(b1), true, 'should touch')
 
