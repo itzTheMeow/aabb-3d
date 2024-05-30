@@ -1,11 +1,14 @@
 import { vec3 } from 'gl-matrix'
 
+import type { ReadonlyVec3 } from 'gl-matrix'
+
 export default class AABB {
-/**
- * @param {import('gl-matrix').ReadonlyVec3} pos
- * @param {import('gl-matrix').ReadonlyVec3} vec
- */
-constructor(pos, vec) {
+base: vec3
+vec: vec3
+max: vec3
+mag: number
+
+constructor(pos: ReadonlyVec3, vec: ReadonlyVec3) {
 
   var pos2 = vec3.create()
   vec3.add(pos2, pos, vec)
@@ -18,94 +21,55 @@ constructor(pos, vec) {
 
 }
 
-/**
- * @returns {number}
- */
-width() {
+width(): number {
   return this.vec[0]
 }
 
-/**
- * @returns {number}
- */
-height() {
+height(): number {
   return this.vec[1]
 }
 
-/**
- * @returns {number}
- */
-depth() {
+depth(): number {
   return this.vec[2]
 }
 
-/**
- * @returns {number}
- */
-x0() {
+x0(): number {
   return this.base[0]
 }
 
-/**
- * @returns {number}
- */
-y0() {
+y0(): number {
   return this.base[1]
 }
 
-/**
- * @returns {number}
- */
-z0() {
+z0(): number {
   return this.base[2]
 }
 
-/**
- * @returns {number}
- */
-x1() {
+x1(): number {
   return this.max[0]
 }
 
-/**
- * @returns {number}
- */
-y1() {
+y1(): number {
   return this.max[1]
 }
 
-/**
- * @returns {number}
- */
-z1() {
+z1(): number {
   return this.max[2]
 }
 
-/**
- * @param {import('gl-matrix').ReadonlyVec3} by
- * @returns {this}
- */
-translate(by) {
+translate(by: ReadonlyVec3): this {
   vec3.add(this.max, this.max, by)
   vec3.add(this.base, this.base, by)
   return this
 }
 
-/**
- * @param {import('gl-matrix').ReadonlyVec3} pos
- * @returns {this}
- */
-setPosition(pos) {
+setPosition(pos: ReadonlyVec3): this {
   vec3.add(this.max, pos, this.vec)
   vec3.copy(this.base, pos)
   return this
 }
 
-/**
- * @param {AABB} aabb
- * @returns {AABB}
- */
-expand(aabb) {
+expand(aabb: AABB): AABB {
   var max = vec3.create()
     , min = vec3.create()
 
@@ -116,11 +80,7 @@ expand(aabb) {
   return new AABB(min, max)
 }
 
-/**
- * @param {AABB} aabb
- * @returns {boolean}
- */
-intersects(aabb) {
+intersects(aabb: AABB): boolean {
   if(aabb.base[0] > this.max[0]) return false
   if(aabb.base[1] > this.max[1]) return false
   if(aabb.base[2] > this.max[2]) return false
@@ -131,11 +91,7 @@ intersects(aabb) {
   return true
 }
 
-/**
- * @param {AABB} aabb
- * @returns {boolean}
- */
-touches(aabb) {
+touches(aabb: AABB): boolean {
 
   var intersection = this.union(aabb);
 
@@ -146,11 +102,7 @@ touches(aabb) {
 
 }
 
-/**
- * @param {AABB} aabb
- * @returns {AABB | null}
- */
-union(aabb) {
+union(aabb: AABB): AABB | null {
   if(!this.intersects(aabb)) return null
 
   var base_x = Math.max(aabb.base[0], this.base[0])
