@@ -1,6 +1,6 @@
-var vec3 = require('gl-matrix').vec3
+import { vec3 } from 'gl-matrix'
 
-class AABB {
+export default class AABB {
 /**
  * @param {import('gl-matrix').ReadonlyVec3} pos
  * @param {import('gl-matrix').ReadonlyVec3} vec
@@ -164,7 +164,6 @@ union(aabb) {
 }
 }
 
-module.exports = AABB
 
 
 

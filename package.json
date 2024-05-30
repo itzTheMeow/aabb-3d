@@ -2,6 +2,7 @@
   "name": "aabb-3d",
   "version": "0.2.1",
   "description": "3d axis aligned bounding boxes",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"

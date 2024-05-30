@@ -1,5 +1,5 @@
-var test = require('tape')
-  , aabb = require('./index')
+import test from 'tape'
+import aabb from './index.js'
 
 
 if(typeof Float32Array === 'undefined') {
