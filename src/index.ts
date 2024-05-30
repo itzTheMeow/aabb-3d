@@ -55,6 +55,9 @@ export default class AABB {
     return this.max[2]
   }
 
+  /**
+   * Moves the box. Returns itself.
+   */
   translate(by: ReadonlyVec3): this {
     vec3.add(this.max, this.max, by)
     vec3.add(this.base, this.base, by)
@@ -67,6 +70,9 @@ export default class AABB {
     return this
   }
 
+  /**
+   * Returns a new `aabb` that surrounds both `aabb`'s.
+   */
   expand(aabb: AABB): AABB {
     const max = vec3.create()
     const min = vec3.create()
@@ -78,6 +84,9 @@ export default class AABB {
     return new AABB(min, max)
   }
 
+  /**
+   * Returns `true` if the two bounding boxes intersect (or touch at all.)
+   */
   intersects(aabb: AABB): boolean {
     if (aabb.base[0] > this.max[0]) return false
     if (aabb.base[1] > this.max[1]) return false
@@ -98,6 +107,10 @@ export default class AABB {
            (intersection.depth() == 0))
   }
 
+  /**
+   * Returns a new `aabb` representing the shared area of the
+   * two `aabb`'s. returns `null` if the boxes don't intersect.
+   */
   union(aabb: AABB): AABB | null {
     if (!this.intersects(aabb)) return null
 
