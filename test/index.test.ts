@@ -2,8 +2,7 @@ import { test } from 'node:test'
 import { ok, strictEqual } from 'node:assert'
 import aabb from '../src/index.js'
 
-
-if(typeof Float32Array === 'undefined') {
+if (typeof Float32Array === 'undefined') {
 
 }
 
@@ -57,27 +56,27 @@ test('setPosition works', function() {
     , toy = random()
     , toz = random()
 
-  ok(eps(b.x0(), fromx),   'x0 == fromx')
-  ok(eps(b.y0(), fromy),   'y0 == fromy')
-  ok(eps(b.z0(), fromz),   'z0 == fromz')
-  ok(eps(b.x1(), fromx+w), 'x1 == fromx+w')
-  ok(eps(b.y1(), fromy+h), 'y1 == fromy+h')
-  ok(eps(b.z1(), fromz+d), 'z1 == fromz+d')
-  
+  ok(eps(b.x0(), fromx), 'x0 == fromx')
+  ok(eps(b.y0(), fromy), 'y0 == fromy')
+  ok(eps(b.z0(), fromz), 'z0 == fromz')
+  ok(eps(b.x1(), fromx + w), 'x1 == fromx+w')
+  ok(eps(b.y1(), fromy + h), 'y1 == fromy+h')
+  ok(eps(b.z1(), fromz + d), 'z1 == fromz+d')
+
   b.setPosition([tox, toy, toz])
-  
-  ok(eps(b.x0(), tox),   'x0 == tox')
-  ok(eps(b.y0(), toy),   'y0 == toy')
-  ok(eps(b.z0(), toz),   'z0 == toz')
-  ok(eps(b.x1(), tox+w), 'x1 == tox+w')
-  ok(eps(b.y1(), toy+h), 'y1 == toy+h')
-  ok(eps(b.z1(), toz+d), 'z1 == toz+d')
+
+  ok(eps(b.x0(), tox), 'x0 == tox')
+  ok(eps(b.y0(), toy), 'y0 == toy')
+  ok(eps(b.z0(), toz), 'z0 == toz')
+  ok(eps(b.x1(), tox + w), 'x1 == tox+w')
+  ok(eps(b.y1(), toy + h), 'y1 == toy+h')
+  ok(eps(b.z1(), toz + d), 'z1 == toz+d')
 })
 
 test('expand works', function() {
   var b0 = new aabb([0, 0, 0], [10, 10, 10])
     , b1 = new aabb([-5, -5, -5], [2, 2, 2])
-    , b2 
+    , b2
 
   b2 = b0.expand(b1)
 
@@ -98,16 +97,16 @@ test('intersects works', function() {
 
   b1 = new aabb([0, 0, 0], [2, 20, 2])
   strictEqual(b0.intersects(b1), false, 'should not intersect (y intersects)')
-  
+
   b1 = new aabb([0, 0, 0], [2, 2, 20])
   strictEqual(b0.intersects(b1), false, 'should not intersect (z intersects)')
-  
+
   b1 = new aabb([21, 20, 20], [20, 20, 20])
   strictEqual(b0.intersects(b1), false, 'should not intersect (y intersects base)')
-  
+
   b1 = new aabb([20, 21, 20], [20, 20, 20])
   strictEqual(b0.intersects(b1), false, 'should not intersect (x intersects base)')
-  
+
   b1 = new aabb([20, 20, 21], [20, 20, 20])
   strictEqual(b0.intersects(b1), false, 'should not intersect (z intersects base)')
 
@@ -124,8 +123,8 @@ test('intersects works', function() {
   strictEqual(b0.intersects(b1), false, 'should not intersect (b0 does not contain b1)')
 })
 
-test('touches works', function() { 
-  var b0 = new aabb([10,10,10], [10, 10, 10])
+test('touches works', function() {
+  var b0 = new aabb([10, 10, 10], [10, 10, 10])
     , b1 = new aabb([0, 0, 0], [10, 10, 10])
 
   strictEqual(b0.touches(b1), true, 'should touch')
