@@ -5,10 +5,10 @@ Axis aligned bounding boxes for fun and profit.
 [![browser support](http://ci.testling.com/chrisdickinson/aabb-3d.png)](http://ci.testling.com/chrisdickinson/aabb-3d)
 
 ```javascript
-var aabb = require('aabb-3d')
+import aabb from 'aabb-3d'
 
-var bounding_box = aabb([0, 0, 0], [12, 12, 12])   // x, y, z == 0; width, height, depth == 12
-  , other = aabb([10, 10, 10], [2, 2, 2])
+const bounding_box = new aabb([0, 0, 0], [12, 12, 12])   // x, y, z == 0; width, height, depth == 12
+const other = new aabb([10, 10, 10], [2, 2, 2])
 
 bounding_box.intersects(other) // true
 bounding_box.translate([2, 2, 2])  // moves the bounding box
@@ -18,7 +18,7 @@ bounding_box.expand(other)  // returns a new aabb that surrounds both bboxes
 
 # API
 
-### aabb = [new ]aabb([x, y, z], [w, h, d])
+### aabb = new aabb([x, y, z], [w, h, d])
 
 returns a new aabb.
 
