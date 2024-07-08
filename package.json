@@ -3,8 +3,7 @@
   "version": "0.3.0",
   "description": "3d axis aligned bounding boxes",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
   "scripts": {
     "build": "tsc --project ./tsconfig.build.json",
     "dev": "tsc --watch",
